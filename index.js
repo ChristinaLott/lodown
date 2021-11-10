@@ -67,34 +67,22 @@ module.exports.typeOf = typeOf;
  * values at the first index and onward based on number. If the input number
  * is not a number, it returns the first element in the array. If an array 
  * is not inputted, it returns an empty array.  
- * @param {Array} array: The array to pull the first value at index and onward from. 
- * @param {Number} number: The number by which how many values from the first index to pull from.
- * @returns {Array} array: Returns the values from first index, an empty array, or first element.
+ * @param {Array} arr: The array to pull the first value at index and onward from. 
+ * @param {Number} num: The number by which how many values from the first index to pull from.
+ * @returns {Array} arr: Returns the values from first index, an empty array, or first element.
  */
-function first(array, number){
-console.log(array, number, "argument values");
-    var outputArr = [];
-if(!Array.isArray(array) || number <= 0){
+function first(arr, num){
+if(!Array.isArray(arr) || num <= 0){
       return [];
-  } else if(number === undefined || number === NaN){
-      return array[0];
-  } else if (number > array.length) {
-      return array;
+  } else if(num === undefined || num === NaN){
+      return arr[0];
+  } else if (num > arr.length) {
+      return arr;
   } else {
-    return array.slice(0, number);
+    return arr.slice(0, num);
   }
 }
 module.exports.first = first;
-
-    //} else if(number !== "undefined" && number !== NaN && number > 0){
-   // for(var i = 0; i <= array.length; i++){
-   // outputArr.push(array[i]);
-    //console.log(outputArr, "what is in this darn array?");
-  //  console.log(outputArr, "where art thou array?")
-  //  return outputArr;
- // } else {
- //     return array[0]; //not sure if I should have this be an else if before trying to pull numbers
- // }
 
 
 
@@ -116,6 +104,17 @@ module.exports.first = first;
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+/**
+ * last: Designed to take an array and a number. It looks within the array
+ * at the last index, which should be the input number. It looks 
+ * at the last index and backwards, based on the input number. Returns the 
+ * values at the last index and backwards based on number. If the input number
+ * is not a number, it returns the last element in the array. If an array 
+ * is not inputted, it returns an empty array.  
+ * @param {Array} arr: The array to pull the last value at index and backwards from. 
+ * @param {Number} num: The number by which how many values from the last index to pull from. 
+ * @returns {Array} arr: Returns the values from last index, an empty array, or last element.
+ */
 function last (arr, num){
 if(!Array.isArray(arr) || num < 0){
     return [];
@@ -125,9 +124,11 @@ if(!Array.isArray(arr) || num < 0){
     return arr;
 } else {
     return arr.slice(-num); //using - before a number/parameter with slice will remove everything before that number
-}
+    }
 }
 module.exports.last = last;
+
+
 
 /** _.indexOf
 * Arguments:
