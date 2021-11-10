@@ -480,10 +480,14 @@ module.exports.every = every;
 //if function not given, return true if at least ONE element is truthy, otherwise return false
 
 /**
- * some: Designed to
- * @param {*} collection 
- * @param {*} func 
- * @returns 
+ * some: Designed to use function on every element in collection with iteration - 
+ * if an array uses current value, current index, and collection (for loop) as parameters or if an
+ * object uses current value, current key, and collection as parameters instead (for in loop).
+ * Returns true if list/return values are all truthy. If any list items/return values are falsey
+ * returns false. Returns true if no function and all elements/values are truthy - otherwise falsey.
+ * @param {Array or Object} collection: 
+ * @param {Function} func: 
+ * @returns {Boolean} true or false:
  */
 function some (collection, func){
     if(!func === true){ //we are checking if func is falsy with !func, if it is FALSY/ === true, then do...
