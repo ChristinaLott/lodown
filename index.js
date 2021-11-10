@@ -153,7 +153,12 @@ module.exports.last = last;
 //NO [].indexOf()
 
 
-
+/**
+ * indexOf: Designed to 
+ * @param {Array} array 
+ * @param {Any Value} value 
+ * @returns 
+ */
 function indexOf(array, value){
     for(var i = 0; i <= array.length - 1; i++){
         if(array[i] === value){
