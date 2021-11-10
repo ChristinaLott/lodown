@@ -130,65 +130,33 @@ module.exports.last = last;
 
 
 
-/** _.indexOf
-* Arguments:
-*   1) An array
-*   2) A value
-* Objectives:
-*   1) Return the index of <array> that is the first occurrance of <value>
-*   2) Return -1 if <value> is not in <array>
-*   3) Do not use [].indexOf()!
-* Edge Cases:
-*   1) What if <array> has multiple occurances of val?
-*   2) What if <val> isn't in <array>?
-* Examples:
-*   _.indexOf(["a","b","c"], "c") -> 2
-*   _.indexOf(["a","b","c"], "d") -> -1
-*/
-
-
-//return index[#] of array at first occurance/iteration of <value>
-    //looping through most likely
-//return -1 IF <value> !Array.isArray/<array> not the thing
-//NO [].indexOf()
-
-
 /**
- * indexOf: Designed to 
- * @param {Array} array 
- * @param {Any Value} value 
- * @returns 
+ * indexOf: Designed to iterate through an array until first match is found
+ * with value. Returns the matched value's index ((["a","b","c"], "c") -> 2).
+ * If value is not in the array returns -1.
+ * @param {Array} arr: the array to iterate through to look for a match.
+ * @param {Any Value} value: the value to match within the array. 
+ * @returns { Index } i: returns the index number for where match is at with value.
  */
-function indexOf(array, value){
-    for(var i = 0; i <= array.length - 1; i++){
-        if(array[i] === value){
-            return i; //returning the index number where the match is at
+function indexOf(arr, value){
+    for(var i = 0; i <= arr.length - 1; i++){
+        if(arr[i] === value){
+            return i;
         } 
-     } return -1; //have this outside of the for loop because otherwise when iterate it would hit this on the first loop and exit out
+     } return -1; 
  }
  module.exports.indexOf = indexOf;
 
 
 
-/** _.contains
-* Arguments:
-*   1) An array
-*   2) A value
-* Objectives:
-*   1) Return true if <array> contains <value>
-*   2) Return false otherwise
-*   3) You must use the ternary operator in your implementation.
-* Edge Cases:
-*   1) did you use === ?
-*   2) what if no <value> is given?
-* Examples:
-*   _.contains([1,"two", 3.14], "two") -> true
-*/
-
- //IF <array> has <value> return TRUE
- //Else return FALSE (<value> is undefined, array does NOT have value)
- //use ternary operator
-
+ /**
+  * contains: Designed to iterate through an array to check if given value
+  * is present in the array. Returns either true or false based on outcome.
+  * On each iteration uses ternary to see if value is within the given array.
+  * @param {Array} array: the array to iterate through to look for given value.
+  * @param {Any Value} value: the value that's being looked for in array.
+  * @returns {Boolean} true or false
+  */
 function contains (array, value){
     for(var i = 0; i <= array.length; i++){ //includes doesn't need i, for some reason
        return array.includes(value) ? true : false;  //I don't know why  return array[i] === value ? true : false;  couldn't pass one of the tests...
@@ -260,49 +228,50 @@ _.each = function (collection, func){
 
 //var container for nabbed 1st values, then loop to grab those 1st values with an if statement (if not in array then add, if in array/theres a match then do nothing)
 
+/**
+ * unique: Designed to take in an array and return an array with only unique
+ * elements within it (so removes duplicates). Iterates through given array,
+ * on each iteration uses indexOf's output/return to determine which elements
+ * in the given array to push into output array. If indexOf finds a match, it
+ * does nothing. However, if there is not a match (indicated by its return of -1), 
+ * then the conditional statement is true and the iteration then pushes the value
+ * at the index/that element's value into the output array. Thus only pushing in
+ * unique elements/values and removing duplicates.
+ * @param {Array} arr: the array to iterate through and pull out nonduplcate values from.
+ * @returns {Array} outputArr: the array collecting the nonduplicated elements/values.
+ */
 function unique (arr){
     var outputArr = [];
     for(var i = 0; i < arr.length; i++){
-        if(-1 === _.indexOf(outputArr, arr[i])){ //indexOf is looking for matches, if NO match then it returns -1. Which means it's NOT in the array. So we can use -1 to determine when to ADD elements into our array
-            outputArr.push(arr[i]);          //then return the value of that iterated element in the given array
+        if(-1 === _.indexOf(outputArr, arr[i])){ 
+            outputArr.push(arr[i]);          
         }
         }
         return outputArr;
     }
 module.exports.unique = unique;
-//this one is nifty and head hurter! But DONE!
 
 
 
-
-/** _.filter
-* Arguments:
-*   1) An array
-*   2) A function
-* Objectives:
-*   1) call <function> for each element in <array> passing the arguments:
-*      the element, it's index, <array>
-*   2) return a new array of elements for which calling <function> returned true
-* Edge Cases:
-*   1) What if <function> returns something other than true or false?
-* Examples:
-*   _.filter([1,2,3,4,5], function(x){return x%2 === 0}) -> [2,4]
-* Extra Credit:
-*   use _.each in your implementation
-*/
-
-    //use function on EACH element in <array> - looping
-        //use element, element's index, <array> as arguments
-    //RETURN NEW array of elements when <function> returns true 
-        //(func outcome === true, then return a NEW array with same values)
-    //what do if array returns something other than t/f??? idk
-    //special credit if use _.each...eeeeh
-
+/**
+ * filter: Designed to iterate through a given array and on each iteration
+ * perform a function that that pushes the value at the iterated index into
+ * the output array, to create a filter. Uses the condition of if the given
+ * function's results to truthy using it's arguments of the array value/element at index,
+ * that index number, and the given array then push the value at the iteration
+ * into the output array.
+ *   filter([1,2,3,4,5], function(x){
+ *      return x%2 === 0;
+ *   }) -> [2,4]
+ * @param {Array} arr: the array to iterate through to get values to push into output array.
+ * @param {Function} func: the action to apply to determine if the outcome is truthy/which elements to filter.
+ * @returns {Array} outputArr: where the collected truthy values from iteration are pushed into. Filtered values.
+ */
 function filter (arr, func){
-    var outputArr = []; //..think I need a container for the func'd values
+    var outputArr = []; 
     for(var i = 0; i < arr.length; i++){
         if(func(arr[i], i, arr) === true){ //if condition AUTOMATICALLY checks for truthy, so could drop === true
-            outputArr.push(arr[i]); //thought this was new array elements? but undefined??
+            outputArr.push(arr[i]); 
         }
     }
     return outputArr;
@@ -310,26 +279,21 @@ function filter (arr, func){
 module.exports.filter = filter;
 
 
-/** _.reject
-* Arguments:
-*   1) An array
-*   2) A function
-* Objectives:
-*   1) call <function> for each element in <array> passing the arguments:
-*      the element, it's index, <array>
-*   2) return a new array of elements for which calling <function> returned false
-*   3) This is the logical inverse if _.filter()
-* Examples:
-*   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
-*/
 
-
-//use function on EACH element in array = loop
-    //use element, element's  index, array as arguments
-//RETURN NEW array of elements when using function results in FALSE
-    //protip: filter method in reverse
-
-
+/**
+ * reject: Designed to iterate through given array, performing the given 
+ * function upon the iteration and takes the element/iterated value, index,
+ * and array as arguments. Pushes the rejected or falsey elements/values at i
+ * into the output array (if the element's result from the function is falsey, 
+ * so not true, or rejected, then it's collected). This is the inverse of the 
+ * filter function. 
+ *   reject([1,2,3,4,5], function(e){
+ *      return e%2 === 0;
+ *   }) -> [1,3,5]
+ * @param {Array} arr: the array to iterate through to get values to push into output array.
+ * @param {Function} func: the action to apply to determine if the outcome is falsy/which elements to reject.
+ * @returns {Array} outputArr: where the collected falsey values from iteration are pushed into. Rejected values.
+ */
 function reject (arr, func){
     var outputArr = []; 
     for(var i = 0; i < arr.length; i++){
@@ -343,110 +307,53 @@ module.exports.reject = reject;
 
 
 
-/** _.partition
-* Arguments:
-*   1) An array
-*   2) A function
-* Objectives:
-*   1) Call <function> for each element in <array> passing it the arguments:
-*       element, key, <array>
-*   2) Return an array that is made up of 2 sub arrays:
-*       0) An array that contains all the values for which <function> returned something truthy
-*       1) An array that contains all the values for which <function> returned something falsy
-* Edge Cases:
-*   1) This is going to return an array of arrays.
-* Examples:
-*   _.partition([1,2,3,4,5], function(element,index,arr){
-*     return element % 2 === 0;
-*   }); -> [[2,4],[1,3,5]]
-}
-*/
-
-
-//use function on EACH element in array
-    //use element, key, array as arguments func(element, key, arr)
-//RETURN array with 2 sub arrays
-    //0 array (1st array) has ALL values for func returned truthy (> 0, true, all else)
-    //1 array (2nd array) has ALL values for func returned falsy (null, 0, false, undefined, NaN, "")
-        //this is an array WITH arrays within it... so maybe something like: arr = [[1,2,3], ["a","b',"c"], [false, true, NaN]]
-
-
+/**
+ * partition: Designed to take an array and a function that determines what action to take. 
+ * Returns two arrays based on result of the given function, one array has the truthy values/elements 
+ * (filtered array. > 0, true, all else) and the other has the falsey values/elements (rejected array. 
+ * Those values that result in false from the given function. null, 0, false, undefined, NaN, ""). 
+ * 
+ *   partition([1,2,3,4,5], function(element,index,arr){
+ *     return element % 2 === 0;
+ *   }); -> [[2,4],[1,3,5]]
+ * @param {Array} arr: the given array to use function on to pull truthy and falsy values into two arrays. 
+ * @param {Function} func: the action to apply to determine if the outcome is truthy or falsy/which elements to filter or reject.
+ * @returns {Array, Array} filter array, reject array: returns an array of arrays - truthy values, falsey values
+ */
 function partition (arr, func){
-    return [_.filter(arr, func), _.reject(arr, func)]; //referenced back prior methods cause they do the thing of resulting in arrays that correspond to if the condition was true or false..
+    return [filter(arr, func), reject(arr, func)]; //referenced back prior methods cause they do the thing of resulting in arrays that correspond to if the condition was true or false..
 }
 module.exports.partition = partition;
 
-    /* var outputArr = []; //would I need to outputArrs? need to check the test args to see what use
-    var outputArr2 = [];
-    for(var i = 0; i < arr.length; i++){
-        if(arr[i] === true){
-            outputArr.push(arr[i]);
-        } else if (arr[i] === false){
-            outputArr2.push(arr[i]);
-        }
-    }
-    return outputArr; //not sure if I should have two different outputArrs that return for each condition
-} */
 
 
-
-
-/** _.map
-* Arguments:
-*   1) A collection
-*   2) a function
-* Objectives:
-*   1) call <function> for each element in <collection> passing the arguments:
-*        if <collection> is an array:
-*            the element, it's index, <collection>
-*        if <collection> is an object:
-*            the value, it's key, <collection>
-*   2) save the return value of each <function> call in a new array
-*   3) return the new array
-* Examples:
-*   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
-*/
-
-
-//use func on EACH element in the collection
-    //IF an ARRAY    
-        //use element, element's index, collection as arguments: func(collection[i], [i], collection)
-    //IF an OBJECT
-        //use value, key, collection as arguments: func(collection[i]??, [i]?? ,collection)
-//make a container array for new value of each function
-        //var outputArr = [];
-        //outputArr.push(arr[i])???
-        //return outputArr;
-
+/**
+ * map: Designed to take a collection of either an array or object and use a function on each element
+ * within the collection. Returns the result of the function into an output array. Determines type of
+ * collection (either array or object), then applies the function on each element within the 
+ * given collection. Pushes the results of the function at each iteration into the output array
+ * that is returned.
+ *  map([1,2,3,4], function(e){
+ *      return e * 2;
+ *  }) -> [2,4,6,8]
+ * @param {Array or Object} collection: either the array or object to iterate through and apply given function to.
+ * @param {Function} func: the action to take upon each element in the array as iterate through it.
+ * @returns {Array} outputArr: binds all of the results of the function into a new array to be returned at end of iteration.
+ */
 function map (collection, func){
     var outputArr = [];
    if(Array.isArray(collection) === true){
        for(var i = 0; i < collection.length; i++){
-        outputArr.push(func(collection[i], i, collection)); //functions evaluate to their RESULT. so can expect that outcome, and therefore slip it into an array
+        outputArr.push(func(collection[i], i, collection)); 
        }
    } else {
         for(var key in collection){
-            outputArr.push(func(collection[key], key, collection)); //so like, indexes and keys or whatever kinda work the same because they're both properties in their collections
+            outputArr.push(func(collection[key], key, collection)); 
         }
    }
     return outputArr;
 }
 module.exports.map = map;
-
-//re-review this concept...think of mapping like mapping the field values in Salesforce when importing in data
-
-
-
-    //for(var i = 0; i < collection.length; i++){
-      //  if(Array.isArray(collection) === true){
-           // func(collection[i], i, collection);
-            //outputArr.push(collection[i]);
-       // } else if (object === true /*grab that long arse code to distinigush between arr/obj or finish that prior func to plop in */){
-    //         func(/*I'm kinda stumped on the arguments to plug in here...*/);
-    //         outputArr2.push(collection[i]); //eeeeh, how would we update the array with the value? guess we could push the obj/key/value into the array still??
-    //     }
-    // }
-
 
 
 
@@ -458,25 +365,27 @@ module.exports.map = map;
 *   1) Return an array containing the value of <property> for every element in <array>
 *   2) You must use _.map() in your implementation.
 * Examples:
-*   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
+*   
 */
 
 
-//RETURN array with property's value for EVERY element in array = looping
-    //make a new container??
-//use map!
-
-
+/**
+ * pluck: Designed to pluck out values of properties within a given array of objects. Iterates
+ * through array of objects using map (map discerns if collection is an array or object, returns
+ * the results of the iteration mapped out). Returns a list as an array of the desired value(s) at
+ * the given property.
+ *      pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
+ * @param {Array of Objects} arrObj: the array to iterate through with map to look for values at given property.
+ * @param {} property: the property to look within the objects in the array to pluck out values from.
+ * @returns {Array} element[property]: the value(s) returned from the matched given property.
+ */
 function pluck (arrObj, property){
    return _.map(arrObj, function(element, i, co) {
-       // console.log(element, '<-- val')
-       return element[property]; //bracket notation calculates what the thing is - so thinking, vs. dot notation which is literally looking for thing as written/verbitum ...need the value at this property.;
-   }); //lines 480 - 482 are part of the annoymous/inner function code block
+       return element[property]; //bracket notation calculates what the thing is, is a placeholder rather than literal 
+   });
 }
 module.exports.pluck = pluck;
 
-//revisit to get a firmer grasp on this concept
-//for later me, if wanna do for better clarity, could assign the inner function  to it's own var named function to better get it
 
 
 /** _.every
@@ -510,7 +419,12 @@ module.exports.pluck = pluck;
 //what do if function results aren't boolean???
 
 
-
+/**
+ * every: Designed to
+ * @param {*} collection 
+ * @param {*} func 
+ * @returns 
+ */
 function every (collection, func){
     if(!func === true){ //we are checking if func is falsy with !func, if it is FALSY/ === true, then do...
      func = function(element){
@@ -568,6 +482,12 @@ module.exports.every = every;
 //return false if ALL element return false(so 0 true returns)
 //if function not given, return true if at least ONE element is truthy, otherwise return false
 
+/**
+ * some: Designed to
+ * @param {*} collection 
+ * @param {*} func 
+ * @returns 
+ */
 function some (collection, func){
     if(!func === true){ //we are checking if func is falsy with !func, if it is FALSY/ === true, then do...
         func = function(element){
@@ -626,7 +546,13 @@ module.exports.some = some;
         //Seed could be any kind of data type (WILDCARD), iterate through the seed 
     //Output: function value the iteration for use for next iteration. Return final function (???)
 
-
+/**
+ * reduce: Designed to
+ * @param {*} arr 
+ * @param {*} func 
+ * @param {*} seed 
+ * @returns 
+ */
 function reduce (arr, func, seed){
    if(seed === undefined){
      seed = arr[0];
@@ -669,7 +595,12 @@ module.exports.reduce = reduce;
     //...how to make room for more objects, if given?
     //how to setup a function to take any # of arguments???
 
-
+/**
+ * extend: Designed to
+ * @param {*} obj1 
+ * @param  {...any} moreObjs 
+ * @returns 
+ */
 function extend (obj1, ...moreObjs){ //use rest parameter, which is an array thingie
 var outputObj = obj1;
 
