@@ -410,20 +410,18 @@ module.exports.pluck = pluck;
 */
 
 
-//use function on EVERY element of collection
-    //IF collection === array, then use current element[i], element's index i, and collection as arguments
-    //IF/else collection is an object then use current value/object[key], current key, and collection as arguments
-//IF EVERY element return value is true, return true
-//IF ANY of the values return false then return false
-//IF NO FUNCTION given, return true if every element === truthy, if any/even one return false then return false
-//what do if function results aren't boolean???
-
 
 /**
- * every: Designed to
- * @param {*} collection 
- * @param {*} func 
- * @returns 
+ * every: Designed to use function on every element in collection with iteration - 
+ * if an array uses current value, current index, and collection (for loop) as parameters or if an
+ * object uses current value, current key, and collection as parameters instead (for in loop).
+ * Returns true if list/return values are all truthy. If any list items/return values are falsey
+ * returns false. Returns true if no function and all elements/values are truthy - otherwise falsey.
+ *     every([2,4,6], function(e){return e % 2 === 0}) -> true
+*      every([1,2,3], function(e){return e % 2 === 0}) -> false
+ * @param {Array or Object} collection: a list that is either an array or object which we test for truthy or falsey.
+ * @param {Function} func: the function that is our test upon the collection to determine truthy or falsey of values/elements.
+ * @returns {Boolean} true or false or element: if all elements are truthy from function returns true, else if returns false, or if no function returns element.
  */
 function every (collection, func){
     if(!func === true){ //we are checking if func is falsy with !func, if it is FALSY/ === true, then do...
@@ -450,7 +448,6 @@ function every (collection, func){
 }
 module.exports.every = every;
 
-//need to revisit for deeper understanding, esp. regarding how element comes to be in first if
 
 
 /** _.some
