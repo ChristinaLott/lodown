@@ -24,57 +24,25 @@ function each(collection, action) {
 }
 module.exports.each = each;
 
+
+
 /**
  * identity: designed to accept a value that takes in any data type and return the input value.
- * @param
- * /
-
-function identity(value){
-    return value;
-}
-
-
-
-
-
-
-
-/** _.identity
-* Arguments:
-*   1) Any value
-* Objectives:
-*   1) Returns <value> unchanged
-* Examples:
-*   _.identity(5) === 5
-*   _.identity({a: "b"}) === {a: "b"}
-*/
-
-
+ * @param {any value} value: 
+ * @returns {any value} value: returns value unchanged.
+ */
 function identity (value){
     return value;
 }
 module.exports.identity = identity;
 
-/** _.typeOf
-* Arguments:
-*   1) Any value
-* Objectives:
-*   1) Return the type of <value> as a string
-*       Types are one of:
-*          - "string"
-*          - "array"
-*          - "object"
-*          - "undefined"
-*          - "number"
-*          - "boolean"
-*          - "null"
-*          - "function"
-* Examples:
-* _.typeOf(134) -> "number"
-* _.typeOf("javascript") -> "string"
-* _.typeOf([1,2,3]) -> "array"
-*/
 
+
+/**
+ * typeOf: Designed to return as a string what type of data the inputted value is.
+ * @param {Any Value} value: to determine type of data it is.
+ * @returns {String}
+ */
 function typeOf(value){
     if(typeof value !== "object"){
         return typeof value;
@@ -90,36 +58,19 @@ function typeOf(value){
 }
 module.exports.typeOf = typeOf;
 
-/** _.first
-* Arguments:
-*   1) An array
-*   2) A number
-* Objectives:
-*   1) If <array> is not an array, return []
-*   2) If <number> is not given or not a number, return just the first element in <array>.
-*   3) Otherwise, return the first <number> items of <array>
-* Edge Cases:
-*   1) What if <number> is negative?
-*   2) What if <number> is greater than <array>.length?
-* Examples:
-*   _.first("ponies", 1) -> []
-*   _.first(["a", "b", "c"], "ponies") -> "a"
-*   _.first(["a", "b", "c"], 1) -> "a"
-*   _.first(["a", "b", "c"], 2) -> ["a", "b"]
-*/
 
-//conditional chain, with 3 possible returns
-    //if array !== arr ? return [] and if number === NaN return the first element in array
-    //otherwise return first number items of array
-//Edge cases: number negative? number greater than array.length?
 
-//need to check if array is an array
-    //if an array should be able to check the number against array
-    //if NOT an array return []
-//need to check if number is a number
-    //if a number return that many number of things in the array
-    //if NOT a number NaN nor given return first element of array
-
+/**
+ * first: Designed to take an array and a number. It looks within the array
+ * at the given first index, which should be the input number. It looks 
+ * at the first index and onward, based on the input number. Returns the 
+ * values at the first index and onward based on number. If the input number
+ * is not a number, it returns the first element in the array. If an array 
+ * is not inputted, it returns an empty array.  
+ * @param {Array} array: The array to pull the first value at index and onward from. 
+ * @param {Number} number: The number by which how many values from the first index to pull from.
+ * @returns {Array} array: Returns the values from first index, an empty array, or first element.
+ */
 function first(array, number){
 console.log(array, number, "argument values");
     var outputArr = [];
