@@ -412,16 +412,16 @@ module.exports.pluck = pluck;
 
 
 /**
- * every: Designed to use function on every element in collection with iteration - 
+ * every: Designed to use function on every element in a collection with iteration - 
  * if an array uses current value, current index, and collection (for loop) as parameters or if an
  * object uses current value, current key, and collection as parameters instead (for in loop).
  * Returns true if list/return values are all truthy. If any list items/return values are falsey
  * returns false. Returns true if no function and all elements/values are truthy - otherwise falsey.
  *     every([2,4,6], function(e){return e % 2 === 0}) -> true
 *      every([1,2,3], function(e){return e % 2 === 0}) -> false
- * @param {Array or Object} collection: a list that is either an array or object which we test for truthy or falsey.
+ * @param {Array or Object} collection: a list that is either an array or object which we test each element for truthy or falsey.
  * @param {Function} func: the function that is our test upon the collection to determine truthy or falsey of values/elements.
- * @returns {Boolean} true or false or element: if all elements are truthy from function returns true, else if returns false, or if no function returns element.
+ * @returns {Boolean} true or false: if all elements are truthy from function returns true, else if returns false, or if no function returns true if all truthy or false if any falsey.
  */
 function every (collection, func){
     if(!func === true){ //we are checking if func is falsy with !func, if it is FALSY/ === true, then do...
@@ -450,44 +450,18 @@ module.exports.every = every;
 
 
 
-/** _.some
-* Arguments:
-*   1) A collection
-*   2) A function
-* Objectives:
-*   1) Call <function> for every element of <collection> with the paramaters:
-*       if <collection> is an array:
-*        current element, it's index, <collection>
-*       if <collection> is an object:
-*        current value, current key, <collection>
-*   2) If the return value of calling <function> is true for at least one element, return true
-*   3) If it is false for all elements, return false
-*   4) If <function> is not provided return true if at least one element is truthy, otherwise return false
-* Edge Cases:
-*   1) what if <function> doesn't return a boolean
-*   2) What if <function> is not given?
-* Examples:
-*   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
-*   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
-*/
-
-
-//use function on EVERY element of the collection
-    //IF collection is an ARRAY: element, element's index, collection are the arguments
-    //IF collection is an Object: current value, current key, collection
-//return TRUE if at least ONE element with function called on it is/results  to true
-//return false if ALL element return false(so 0 true returns)
-//if function not given, return true if at least ONE element is truthy, otherwise return false
-
 /**
- * some: Designed to use function on every element in collection with iteration - 
+ * some: Designed to use function on every element in the given collection with iteration - 
  * if an array uses current value, current index, and collection (for loop) as parameters or if an
  * object uses current value, current key, and collection as parameters instead (for in loop).
- * Returns true if list/return values are all truthy. If any list items/return values are falsey
- * returns false. Returns true if no function and all elements/values are truthy - otherwise falsey.
- * @param {Array or Object} collection: 
- * @param {Function} func: 
- * @returns {Boolean} true or false:
+ * Returns true if any list/return values are truthy. If all list items/return values are falsey then
+ * returns false. Returns true if no function and any/at least one elements/values are truthy 
+ * - otherwise falsey. TLDR: anything truthy return true, need all to be falsey to get false.
+ *   some([1,3,5], function(e){return e % 2 === 0}) -> false
+*   _some([1,2,3], function(e){return e % 2 === 0}) -> true
+ * @param {Array or Object} collection: a list that is either an array or object which we test each element for truthy or falsey.
+ * @param {Function} func: the function that is our test upon the collection to determine truthy or falsey of values/elements.
+ * @returns {Boolean} true or false: true or false or element: if any elements are truthy from function returns true, else if all returns false, or if no function returns true if any truthy.
  */
 function some (collection, func){
     if(!func === true){ //we are checking if func is falsy with !func, if it is FALSY/ === true, then do...
