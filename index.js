@@ -488,45 +488,19 @@ function some (collection, func){
    }
 module.exports.some = some;
 
-//for this function used same logic of every (default if return that creates  a function if none, conidtional chain to suss out truthy and falsy results)
-   //difference is that not looking for ALL things to amount to either true or false
-        //instead looking for SOME truthy-ness...so swapped the true false outcomes and dropped the ! statements
 
-
-/** _.reduce
-* Arguments:
-*   1) An array
-*   2) A function
-*   3) A seed
-* Objectives:
-*   1) Call <function> for every element in <collection> passing the arguments:
-*         previous result, element, index
-*   2) Use the return value of <function> as the "previous result"
-*      for the next iteration
-*   3) On the very first iteration, use <seed> as the "previous result"
-*   4) If no <seed> was given, use the first element/value of <collection> as <seed> and continue to the next element
-*   5) After the last iteration, return the return value of the final <function> call
-* Edge Cases:
-*   1) What if <seed> is not given?
-* Examples:
-*   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
-*/
-
-
-//reduce will perform an action on the seed through use of iteration
-//reduce takes a seed and modifies that seed, which becomes the output (for this function)
-//use function on EVERY element in collection
-    //Input: array, function, seed (starting/initial element/value that can be applied/passed through repeatedly. So that don't have to repeatedly declare it)
-        //EDGE CASE: if NO SEED given then use the first element/value in collection to be seed and keep moving throughout elements
-        //Seed could be any kind of data type (WILDCARD), iterate through the seed 
-    //Output: function value the iteration for use for next iteration. Return final function (???)
 
 /**
- * reduce: Designed to
- * @param {*} arr 
- * @param {*} func 
- * @param {*} seed 
- * @returns 
+ * reduce: Designed to iterate through a given array and apply given function and returns a single value, seed. 
+ * The given function uses the previous result(seed), element, and index as its arguments. Start of next 
+ * iteration uses seed as the previous result. If no seed given then it's set as the zeroth index value/element
+ * of the given array for iteration. Basically takes several given values from an array and reduces
+ * them down to a single value, seed.
+ *      reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
+ * @param {Array} arr: the given collection to iterate through and have function performed upon on each iteration. 
+ * @param {Function} func: action to take place upon each element/value in the collection array. Takes seed, value at iteration, and index as arguments.
+ * @param {Number} seed: If given stores the previous value from iteration. If no seed given then it's set to the first element in the array.
+ * @returns {Number} seed:
  */
 function reduce (arr, func, seed){
    if(seed === undefined){
@@ -542,7 +516,6 @@ function reduce (arr, func, seed){
     return seed;
 }
 module.exports.reduce = reduce;
-
 
 
 
