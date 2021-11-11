@@ -519,39 +519,20 @@ module.exports.reduce = reduce;
 
 
 
-/** _.extend
-* Arguments:
-*   1) An Object
-*   2) An Object
-*   ...Possibly more objects
-* Objectives:
-*   1) Copy properties from <object 2> to <object 1>
-*   2) If more objects are passed in, copy their properties to <object 1> as well, in the order they are passed in.
-*   3) Return the update <object 1>
-* Examples:
-*   var data = {a:"one"};
-*   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
-*   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
-*/
-
-
-//copy properties from the 2nd object onto/into the first object
-    //if has same key then overwrite the value with new one
-//if given more objects, then copy their properties to object 1/first object too - but in the order received
-//return updated object 1
-
-    //...how to make room for more objects, if given?
-    //how to setup a function to take any # of arguments???
-
 /**
- * extend: Designed to
- * @param {*} obj1 
- * @param  {...any} moreObjs 
- * @returns 
+ * extend: Designed to make a copy by reference (so changes to original values are reflected) of 
+ * given objects. Adds key values to the output object. However, if same key in output object as in
+ * given object, the recent object will replace/overwrite the value at that same key. Can use/take
+ * any number of objects to add to output object copy, in the order given/received.
+ *    var data = {a:"one"};
+*     extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
+*     extend(data, {a:"two"}); -> data now equals {a:"two"}
+ * @param {Object} obj1: copied object that is referenced in output object to build/add upon.
+ * @param  {...Objects} moreObjs: any number of given objects to be iterated through for adding into output object as a copy by reference.
+ * @returns {Object} outputObj: the returned copy of the combined given objects, once iterated through as an object collection.
  */
 function extend (obj1, ...moreObjs){ //use rest parameter, which is an array thingie
 var outputObj = obj1;
-
 for(var i = 0; i < moreObjs.length; i++){
     var currentObj = moreObjs[i]; //created to help clarify what working with
     for(var key in currentObj){ //pulling i/index here to pinpoint iterated obj arguments that are fed in
@@ -561,10 +542,5 @@ for(var i = 0; i < moreObjs.length; i++){
     return outputObj;
 }
 module.exports.extend = extend;
-
-    //loop through obj1's key and somehow copy it's stuff into a new var container
-    //for second obj2 loop through it too and copy it's stuff to new var that has obj1's stuff already there
-        //use that bracket notation
-        //can treat ...moreobjs like an array
 
 
